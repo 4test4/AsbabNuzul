@@ -1,0 +1,82 @@
+<div class="well align-left">
+<H4>Book translation status:
+	<a id=percent class="btn btn-primary disabled">99%</a> <small><b>done.</b>&nbsp;&nbsp;</small>
+<!--	<span id=done class="badge badge-success">916</span> <small><span class=muted>done.</span></small>-->
+	<span id=partial class="badge badge-warning">41</span> <small><span class=muted>partials;</span></small>
+	<span id=notdone class="badge badge-important">0</span> <small><span class=muted>incompletes left.</span></small>
+	<small><b><span class="pull-right">
+		Show all? <input type="checkbox" ng-init="showall = true" ng-model="showall" onClick="$('.complete').toggle()"></input>
+	</span></b></small>
+</H4>
+<div class="progress progress-striped active">
+  <div id=done class="bar bar-success" style="width: 94%;"></div>
+  <div id=partial class="bar bar-warning" style="width: 6%;"></div>
+  <div id=notdone class="bar bar-danger" style="width: 0%;"></div>
+</div>
+
+<div class=clearfix></div>
+<H6><span class="label label-info">What's new</span>Show recent translations?&nbsp;&nbsp;&nbsp;&nbsp;<A class="btn btn-small" onClick="$('#whatsnew').toggle()">...</A></H4>
+<div id="whatsnew" class="well well-small" style="display:none;max-height:110px;overflow:auto;">
+  <div ng-repeat="(date, entries) in whatsNew" style="clear:both;">
+	<span ng-bind="date" class="muted"></span><BR>
+	<div ng-repeat="(key, whatsNewTopicsStatus) in entries">	
+	  <span ng-repeat="item in whatsNewTopicsStatus.split(' ')">
+		<span ng-init="range = getRange(item)" class="status">
+			<a ng-repeat="box in range.data" ng-init="o = {pg: box, isDone: range.isDone, l: key, i: 1+$index}" 
+			   ng-click="setID(key+box)" ng-mouseover="mouseover(o)" class="{{range.isDone}}">
+			   {{key + box}}<span ng-bind="(' - page: ' + findApproxPageNo(key+box).pg + ' - topic: '+ getSynonym(key+box) )"></span>
+			</a>
+		</span>
+	  </span>
+	</div>
+	<div ng-show="$last"><BR/><BR/></div>
+  </div><HR>
+  End of recent translations<BR/><BR/>
+</div>
+
+<div class="well well-small">
+	<div ng-repeat="key in letters" style="clear:both;">
+	  <div class="{{getClass( key )}}">
+		<div ng-bind="lettersLong[$index] + '  ('+key+')'" class="muted statusHeading" style="font-size: 2em;"></div>
+				
+		<span ng-bind="'Topics done: ' + (letterStatus[key] || '-')"></span>
+		<span ng-bind="' ('+ lettersCount[$index] +' total)' " class="pull-right muted"></span><BR/>
+		
+		<span ng-init="topicsRange = _.range(1, 1+parseInt( lettersCount[$index] ) ) "></span>
+		<span ng-init="topicsStatus = letterStatus[key]"></span>
+		<span ng-repeat="item in topicsStatus.split(' ')">
+			<span ng-init="range = getRange(item)" class="status">
+				<a ng-repeat="box in range.data" ng-init="o = {pg: box, isDone: range.isDone, l: key, i: 1+$index}" 
+				   ng-click="setID(key+box)" ng-mouseover="mouseover(o)" class="{{range.isDone}}">
+				   {{key + box}}<span ng-bind="(' - page: ' + findApproxPageNo(key+box).pg + ' - topic: '+ getSynonym(key+box) )"></span>
+				</a>
+			</span>  		
+		</span>
+
+		<span ng-init="value = pageStatus[key]"></span>
+		<span ng-repeat="item in value.split(' ')">			<!-- {{item}} ... -->
+			<span ng-init="range = getRange(item)" class="status">
+				<a ng-repeat="box in range.data" ng-init="o = {pg: box, isDone: range.isDone, l: key, i: 1+$index}" 
+				   ng-click="click(o)" ng-mouseover="mouseover(o)" class="{{range.isDone}}">{{box}}</a>
+			</span>
+		</span>
+		<HR><BR/>
+	  </div>
+	</div>
+</div>
+</div>
+<script type='text/ng-template' id="updatestatus"
+	var stats = {};
+stats.done = $('.complete  a.true, .incomplete a.true').length;
+stats.partial = $('.complete  a.partial, .incomplete a.partial').length;
+stats.incomplete = $('.incomplete  a.false').length;
+stats.total = stats.done + stats.partial + stats.incomplete;
+stats.percent = (100* (1 - stats.incomplete/stats.total) ).toFixed();
+console.log( JSON.stringify( stats ) );
+	$('#done.bar').attr('style', "width: " + 100*stats.done/stats.total + '%');
+	$('#partial.bar').attr('style', "width: " + 100*stats.partial/stats.total + '%');
+	$('#notdone.bar').attr('style', "width: " + 100*stats.incomplete/stats.total + '%');
+	$('#percent.btn').html( stats.percent +'%' );
+	$('#partial.badge').html(stats.partial);
+	$('#notdone.badge').html(stats.incomplete);
+</script>

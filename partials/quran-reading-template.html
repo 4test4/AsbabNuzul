@@ -1,0 +1,24 @@
+	  <div dir=rtl class="clearfix">
+	   <div ng-show="qurandata" ng-repeat="pageno in [0]" dir="rtl" class="quranpage well well-small">
+		<span ng-repeat="(key, verse) in getQuranData(pageno)" dir=rtl class="quranayah">
+		  <span ng-init="ref = verse.surah + ':' + verse.ayah" id="{{verse.surah + '_' + verse.ayah}}" class="{{($first && 'first')||'' + ($last && 'last')||''}}">
+			<span ng-bind="verse.verse" class="qurantext">
+			</span>
+			&nbsp;
+			<span ng-bind="'﴿'+ verse.ayah +'﴾'" style="{{verse.hasAsbabs && 'background-color: greenyellow;'}}" class="qurantext Xlabel Xlabel-info"></span>
+			<span ng-show="verse.hasAsbabs" ng-bind="'ASBAB'" class="label label-warning"></span>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- 			<span ng-bind="getQuranTrans()[key].verse">
+			</span>
+			<span Xng-show="refTopics" ng-repeat="topic in getRefTopics(ref)">
+				<A ng-click="setID(topic)">
+					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
+				</A>
+			</span>
+			<HR>
+ -->			<div ng-show="$last"><A ng-click="setRef( verse.surah, verse.ayah )" class="btn btn-mini">Next page</A>
+			</div>
+		  </span>
+		</span>
+	   </div>
+	  </div>
