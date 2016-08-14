@@ -171,47 +171,47 @@
 
 			<div id="IDContentOuter" class="align-left well well-small clearfix">
 			  <H4>
-				<div class="pull-right">Section: <select 
-					ng-model="ltr" required 
-					ng-change="setID(letters[ltr] + '1')"
-					ng-options="value.id as value.label group by value.group for value in lettersDD">
-					<option>--</option>
-				  </select>
-				</div>
-				<ul class="pager clearfix" style="margin: 0!important;">
-				  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
-				  Translation
-				  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
-				</ul>
-				<!-- Modal -->
-				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<div class="pull-right">Section: <select 
 						ng-model="ltr" required 
 						ng-change="setID(letters[ltr] + '1')"
 						ng-options="value.id as value.label group by value.group for value in lettersDD">
 						<option>--</option>
-						</select>&nbsp;&nbsp;
+						</select>
 					</div>
 					<ul class="pager clearfix" style="margin: 0!important;">
-						  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
-						  Translation
-						  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
+						<li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
+						Translation
+						<li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
 					</ul>
-				  </div>
-				  <div class="modal-body">
-					<div ng-include src="'partials/synonymsContent.html'"></div>
-					<span ng-bind="getIDUrl()" style="display: none;"></span>			  
-					<div id="NOTRANSLATION" class="alert alert-error" style="display: none">
-					This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
+					<!-- Modal -->
+					<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<div class="pull-right">Section: <select 
+								ng-model="ltr" required 
+								ng-change="setID(letters[ltr] + '1')"
+								ng-options="value.id as value.label group by value.group for value in lettersDD">
+								<option>--</option>
+								</select>&nbsp;&nbsp;
+							</div>
+							<ul class="pager clearfix" style="margin: 0!important;">
+									<li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
+									Translation
+									<li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
+							</ul>
+						</div>
+						<div class="modal-body">
+							<div ng-include src="'partials/synonymsContent.html'"></div>
+							<span ng-bind="getIDUrl()" style="display: none;"></span>			  
+							<div id="NOTRANSLATION" class="alert alert-error" style="display: none">
+									This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
+							</div>
+							<div class="clearfix well well-small iframe1 xpull-left" id="IDContentModal"></div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						</div>
 					</div>
-					<div class="clearfix well well-small iframe1 xpull-left" id="IDContentModal"></div>
-				  </div>
-				  <div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-				  </div>
-				</div>
 			  </H4>
 			  <div ng-include src="'partials/synonymsContent.html'"></div>
 			  <div class=pull-right>
@@ -220,7 +220,7 @@
 			  <a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen&nbsp;&nbsp;<i class="icon-fullscreen"></i></a>
 			  <span ng-bind="getIDUrl()" style="display: none;"></span>			  
 			  <div id="NOTRANSLATION" class="alert alert-error" style="display: none">
-			This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
+					This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
 			  </div>
 			  <div class="clearfix well well-small stagearea pull-left" id="IDContent"></div>
 			</div>
@@ -345,7 +345,6 @@
 		  </div>
 		  
 	    <HR/><BR><div id="disqus_thread"></div>
-		</div>
 	  </div>
 	</div>
 
