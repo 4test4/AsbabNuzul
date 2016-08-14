@@ -67,6 +67,13 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 				}
 			});
 
+			$rootScope.asbabs = asbabs;
+			$rootScope.pageAsbabs = 
+				_.chain( $rootScope.qurandata )
+				.pluck( 'hasAsbabs' )
+				.compact()
+				.value()
+				.join(' ');
 			
 			///setTimeout('scrollToAyah("' + ref + '")', 2000); //now scroll to that ayah
 		});
