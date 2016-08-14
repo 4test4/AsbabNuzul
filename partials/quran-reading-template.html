@@ -6,7 +6,7 @@
 			</span>
 			&nbsp;
 			<span ng-bind="'﴿'+ verse.ayah +'﴾'" style="{{verse.hasAsbabs && 'background-color: greenyellow;'}}" class="qurantext Xlabel Xlabel-info"></span>
-			<span ng-show="verse.hasAsbabs" ng-bind="'ASBAB'" class="label label-warning"></span>
+			<span ng-show="verse.hasAsbabs" ng-bind="'ASBAB'" class="label label-warning" ng-click="showAsbabNuzul(verse.hasAsbabs)"></span>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 <!-- 			<span ng-bind="getQuranTrans()[key].verse">
 			</span>
