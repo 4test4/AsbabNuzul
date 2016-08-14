@@ -160,7 +160,7 @@
 	
 	
 	
-	
+	<div ng-show="REENABLE">
 	  <div class="row-fluid">
 		<div class="span6" id=topics>
 			<gcse:search></gcse:search><BR/>
@@ -332,15 +332,15 @@
 					<div ng-include src="'partials/statusnew.html'"></div>
 				</div>
 -->
-			</div>
+			<div>
 			<!-- Controls -->
 		    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			  <span class="sr-only">Previous</span>
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
 		    </a>
 		    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			  <span class="sr-only">Next</span>
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
 		    </a>
 		  </div>
 		  
@@ -349,47 +349,10 @@
 	  </div>
 	</div>
 
-	<script type="text/ng-template' id="partials/topic-modal.html">		 
-		<!-- Modal -->
-		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Modal header</h3>
-		  </div>
-		  <div class="modal-body">
-			<p><IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
-					ng-src="{{getIDUrl()}}"></IFRAME></p>
-		  </div>
-		  <div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary">Save changes</button>
-		  </div>
-		</div>
-	</script>
-	
+	<!--<script type='text/ng-template' id="partials/topic-modal.html">		 
+	</script>	
 	<script type='text/ng-template' id="partials/quran-template.html">
-	  <div dir=rtl class="clearfix">
-	   <div ng-show="qurandata" ng-repeat="pageno in [0]" dir="rtl" class="quranpage well well-small">
-		<div ng-repeat="(key, verse) in getQuranData(pageno)" dir=rtl class="quranayah">
-		  <div ng-init="ref = verse.surah + ':' + verse.ayah" id="{{verse.surah + '_' + verse.ayah}}" class="{{($first && 'first')||'' + ($last && 'last')||''}}">
-			<span ng-bind="'['+ ref +']'" class="label label-info"></span>
-			<span ng-bind="verse.verse" class="qurantext">
-			</span><BR/>
-			<span ng-bind="getQuranTrans()[key].verse">
-			</span>
-			<span Xng-show="refTopics" ng-repeat="topic in getRefTopics(ref)">
-				<A ng-click="setID(topic)">
-					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
-				</A>
-			</span>
-			<HR>
-			<div ng-show="$last"><A ng-click="setRef( verse.surah, verse.ayah )" class="btn btn-mini">Next page</A>
-			</div>
-		  </div>
-		</div>
-	   </div>
-	  </div>
-	</script>
+	</script>-->
 
 	<!-- Le javascript
     ================================================== -->
