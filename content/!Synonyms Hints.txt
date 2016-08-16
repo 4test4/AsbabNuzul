@@ -24,6 +24,26 @@ y3			2:4:12
 p28			2:4:9
 A3			2:4:10
 
+-------------------
+page 3
+t8			--REMOVE 2:15 (its a side reference only)
+
+page 4
+ch29		--doesnt show up a topic name. why??
+b74 article -- the arabic for 'innallaha 3alaa kulli shayyin qadiyr' is flipped/messed up
+A12  heading is asmaan, clicked link is Sky (see 2:22)
+b21 vs. A12. some pages have amrgins all sides, othesr dont at all.
+ch25: refer to 2:23 for binaa. why?? whats the link?
+
+
+
+
+
+GOOD ONES:
+to fear	dd3		2:19 (lots of words)
+Rain	b8		2:19 2:22 (within same page)
+Clouds	b6		2:19 2:57 (seperated by couple pages)
+
 
 TODO:
 see fake links; /content/b/b30.html torment.as meaning.in etc
