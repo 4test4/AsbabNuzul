@@ -1,0 +1,44 @@
+
+Note: correction: m34 till m48 (end) were off by one index
+      see: https://github.com/4test4/synonyms/commit/146b39594369137bbaf19b7ed11a3f7db26dfe5f
+
+
+HINTS:
+page 1
+m43			1:1:3 
+t15			1:2:1
+p15			1:2:3
+--w2		DROP 1:2 reference
+m4			1:4:1
+q16			1:4:2-3 (yawmu diyn)
+s27			1:6:2-3 (Siraatul mustaqiym)
+b30			1:4:3
+--w2		DROP 1:5 reference
+m18			1:5:4
+n19			1:7:37
+r3			1:6:2
+
+page 2
+sh10		2:2:4
+y3			2:4:12
+p28			2:4:9
+A3			2:4:10
+
+
+TODO:
+see fake links; /content/b/b30.html torment.as meaning.in etc
+
+
+===============================================
+Misc:
+
+b30
+"To reward/recompense""بدلہ دینا"
+" 17:15 39:3 1:4 56:86 56:87 "
+"جَزَى""Jazaa"	"ثَوَّبَ-أَثَابَ""Thaw’waba-Athaaba"	"عَذَّبَ""Ath’thaba"	"دَانَ""Daana"
+
+p15
+"To bring up/nurture""پرورش کرنا"
+" 26:18 17:24 3:27 56:62 56:76 13:12 43:18 1:2 12:4…7:24 3:37 56:71 13:12 43:18 1:2 12:41 12:39 3:44 "
+"أَنْشَأَ""An’sha’aa"1"p15""أَنْبَتَ""An’bata"2"p15""رَبَا""Rabaa"3"p15""رَبَّىَ""Rab’baa"4"p15""كَفَّلَ""Kaf’fala"
+
