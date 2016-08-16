@@ -75,6 +75,16 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 				.value()
 				.join(' ');
 			
+			//check for Synonyms on this page
+			var synonyms = $rootScope.getTopics(), pageSynonyms = [];
+			_.each( $rootScope.qurandata, function(o){
+				var ref = o.surah+':'+ o.ayah,
+				    refSynonyms = $rootScope.findTopicsForRef(ref);
+				pageSynonyms = pageSynonyms.concat( refSynonyms ? refSynonyms : [] );
+			});
+
+			$rootScope.surahSynonyms = synonyms;
+			$rootScope.pageSynonyms = pageSynonyms;
 			///setTimeout('scrollToAyah("' + ref + '")', 2000); //now scroll to that ayah
 		});
 	}

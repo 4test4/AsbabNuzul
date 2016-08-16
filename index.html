@@ -124,16 +124,37 @@
 				</select>
 				<span ng-show="pageAsbabs">{{ pageAsbabs }} on this page have Asbaab ul Nuzul. </span>
 				<span ng-show="asbabs" title="{{ asbabs }}">&nbsp;&nbsp;<p class="text-muted">(to see all Asbabs of surah, mouseover here).</p></span>
-<!-- 				
-				has synonyms: 
+				<span ng-show="pageSynonyms" title="{{ pageSynonyms }}">This page Synonym topics: 
+					<span ng-repeat="topic in pageSynonyms"><A ng-click="setID(topic)"><span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>&nbsp;</A></span>
+			  </span>
+				<span ng-show="surahSynonyms" title="{{ surahSynonyms }}">&nbsp;&nbsp;<p class="text-muted">(to see all Synonym topic indexes of surah, mouseover here).</p></span>
+
+				<!--<PRE>
+					<span ng-repeat="(key, verse) in getQuranData(pageno)" dir=rtl class="quranayah">
+						<span ng-init="ref = verse.surah + ':' + verse.ayah" id="{{verse.surah + '_' + verse.ayah}}" 
+							class="{{($first && 'first')||'' + ($last && 'last')||''}}">
+							{{ findTopicsForRef( ref ) }}
+							<span ng-repeat="topic in findTopicsForRef( ref )">	<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span> </span>
+						<span ng-bind="verse.verse" class="qurantext">
+						</span>
+						&nbsp;
+						<span ng-bind="'﴿'+ verse.ayah +'﴾'" style="{{verse.hasAsbabs && 'background-color: greenyellow;cursor:pointer'}}" class="qurantext Xlabel Xlabel-info" ng-click="showAsbabNuzul(verse.hasAsbabs)" >
+						</span>
+						<span ng-show="verse.hasAsbabs" style="cursor:pointer" ng-bind="'ASBAB'" class="label label-warning" ng-click="showAsbabNuzul(verse.hasAsbabs)">
+						</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+					</span>
+				</span>
+				</PRE>
+
 				<span Xng-show="topics" ng-repeat="topic in getTopics()">
 					<A ng-click="setID(topic)">
 						<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>
 					</A>
 				</span>
 				<span ng-show="!getTopics()" ng-bind="'-none-'"></span>
- -->
-				
+ <HR>
+-->				
 				<div ng-include src="'partials/quran-reading-template.html'"></div>
 				</div>
 				
@@ -160,7 +181,7 @@
 	
 	
 	
-	<div ng-show="REENABLE">
+	<div ng-show="true || REENABLE">
 	  <div class="row-fluid">
 		<div class="span6" id=topics>
 			<gcse:search></gcse:search><BR/>

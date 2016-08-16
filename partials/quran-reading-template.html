@@ -7,6 +7,11 @@
 			&nbsp;
 			<span ng-bind="'﴿'+ verse.ayah +'﴾'" style="{{verse.hasAsbabs && 'background-color: greenyellow;cursor:pointer'}}" class="qurantext Xlabel Xlabel-info" ng-click="showAsbabNuzul(verse.hasAsbabs)" ></span>
 			<span ng-show="verse.hasAsbabs" style="cursor:pointer" ng-bind="'ASBAB'" class="label label-warning" ng-click="showAsbabNuzul(verse.hasAsbabs)"></span>
+			<span ng-repeat="topic in getRefTopics(verse.surah + ':' + verse.ayah)">
+				<A ng-click="setID(topic)">
+					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
+				</A>
+			</span>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 <!-- 			<span ng-bind="getQuranTrans()[key].verse">
 			</span>
