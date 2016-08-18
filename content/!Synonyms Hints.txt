@@ -35,6 +35,17 @@ A12  heading is asmaan, clicked link is Sky (see 2:22)
 b21 vs. A12. some pages have amrgins all sides, othesr dont at all.
 ch25: refer to 2:23 for binaa. why?? whats the link?
 
+---------------------
+page 5
+ch11: content problem: arabic is ltr. 
+k29: fix k29 topic name in synonyms.json; rest all correct.
+b66: topic name was just off; fixed in synonyms.json.
+
+page 6
+h17: content has no title.. honaa/to become, says kaana.
+
+----------------------
+
 
 
 

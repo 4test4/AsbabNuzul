@@ -3,7 +3,7 @@
 <html lang="en" ng-app="myApp" ng-controller="asbabNuzulController">
 <head>
   <meta charset="utf-8">
-  <title ng-bind="'Qur'an Viewer Project'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Qur'an Viewer Project</title>
+  <title ng-bind="'Qur\'an Viewer Project'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Qur'an Viewer Project</title>
 	<!-- CSS Files -->
 	<link type="text/css" href="css/base.css" rel="stylesheet" />
 	<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />
@@ -125,7 +125,7 @@
 				<span ng-show="pageAsbabs">{{ pageAsbabs }} on this page have Asbaab ul Nuzul. </span>
 				<span ng-show="asbabs" title="{{ asbabs }}">&nbsp;&nbsp;<p class="text-muted">(to see all Asbabs of surah, mouseover here).</p></span>
 				<span ng-show="pageSynonyms" title="{{ pageSynonyms }}">This page Synonym topics: 
-					<span ng-repeat="topic in pageSynonyms"><A ng-click="setID(topic)"><span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>&nbsp;</A></span>
+					<span ng-repeat="topic in pageSynonyms"><A ng-click="showSynonymTopic(topic);setID(topic)"><span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>&nbsp;</A></span>
 			  </span>
 				<span ng-show="surahSynonyms" title="{{ surahSynonyms }}">&nbsp;&nbsp;<p class="text-muted">(to see all Synonym topic indexes of surah, mouseover here).</p></span>
 
@@ -262,7 +262,7 @@
 			</select>
 			has synonyms: 
 			<span Xng-show="topics" ng-repeat="topic in getTopics()">
-				<A ng-click="setID(topic)">
+				<A ng-click="showSynonymTopic(topic);setID(topic)">
 					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>
 				</A>
 			</span>

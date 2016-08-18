@@ -162,6 +162,8 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 			setTimeout( "$('.carousel').carousel( 1 );", 5000);
 		}
 	}
+
+
 	$rootScope.setID = function(id){
 		$rootScope.id = id; $rootScope.ltr = _.indexOf($rootScope.letters, id.match(/[^\d]+/)[0] );
 		if( $('#IDContentOuter').length > 0){//scroll topic into view
@@ -170,6 +172,16 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 	}
 	$rootScope.getID = function(){
 		return $rootScope.id = $rootScope.id || "A1";
+	}
+	$rootScope.getIDUrlOnly = function(id){
+		var id = id || $rootScope.id || "A1";
+		var number, path, arr = id.match(/\d+$/), arr2 = id.match(/[^\d]+/);
+		if(arr && arr[0]){	number = arr[0]; }
+		if(arr2 && arr2[0]){ path = arr2[0]; }
+		if(number){
+			_url = $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
+		}
+		return _url;
 	}
 	$rootScope.getIDUrl = function(){var _url;
 		var id = $rootScope.id || "A1";
@@ -197,7 +209,7 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 		var url, _url = "//archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; 
 		var o = findApproxPageNo( id );
 		if(o && o.pg){
-			pg = o.pg; $rootScope.page = pg; url = _url + (17 + pg); console.log('getUrduBookUrl: '+ url);
+			pg = o.pg; $rootScope.page = pg; url = _url + (17 + pg); ///console.log('getUrduBookUrl: '+ url);
 			if(fullScreen){ url = url.replace(/\?ui\=embed/g, '').replace(/1up/g, '2up') }
 			return url;
 		}
@@ -205,7 +217,7 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 	$rootScope.getBookUrl = function(bookID, id, fullScreen){
 		var _url, o = eval(bookID);
 		if(o){
-			_url = o.lookupSura( parseInt($rootScope.sura) ); console.log(  'getBookUrl: ' + bookID +' '+ _url );
+			_url = o.lookupSura( parseInt($rootScope.sura) ); ///console.log(  'getBookUrl: ' + bookID +' '+ _url );
 			if(id && _url){ 
 				$(id).html( "<IFRAME SRC='" + _url + "' STYLE='height:680px;width:95%;'></IFRAME>");
 			}
@@ -307,6 +319,7 @@ findAsbabForAyahs = function(fromObj, toObj){ //TBD
 
 }
 
+
 showAsbabNuzul = function( asbabRef ){
 	var asbabData = window.asbabData,
 		asbabRawData = window.asbabRawData;
@@ -327,12 +340,34 @@ showAsbabNuzul = function( asbabRef ){
 			showAsbabNuzul( asbabRef );
 		});
 	}
-	else{ 
+	else{
+		var html = '';
+		for(var j = 0; j < window.asbabDataKeys.length - 1; ++j){
+			html += '<BR><HR>' + '<span id="' + [ j ] + '"><!-- nothing in here --></span><PRE>' +  
+							 window.asbabRawData.substring( window.asbabData[ j ].index, window.asbabData[1+j].index ) + '</PRE>'; 
+		} 
+		openContentAndScrollToRef( '<Xpre>' + html + '</Xpre>', asbabRef );
 		var i = _.indexOf(window.asbabDataKeys, asbabRef);
 		var response = asbabRawData.substring( window.asbabData[i].index, window.asbabData[1+i].index )
-		alert( response ); console.log( response );
+		//alert( response ); console.log( response );
 	}
 }
+
+openContentAndScrollToRef = function(html, ref){
+	var w = window.open();
+    $(w.document.body).html(html);
+}
+
+
+
+
+showSynonymTopic = function( topicId ){
+	var url = $rootScope.getIDUrlOnly( topicId );
+	$.get(url, function(data){
+		openContentAndScrollToRef(data, topicId);
+	});
+}
+
 
 //Find all topics in current sura:
 findTopicsForSura = function(sura){
