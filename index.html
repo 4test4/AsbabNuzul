@@ -31,7 +31,6 @@
 	</div>
 </script>
 
-
 <script type="text/ng-template" id="partials/synonymsContent.html">
 	<div>
 		<div ng-show="suras.refs" class="xpull-left align-left well well-small clearfix max-height">
@@ -68,75 +67,64 @@
 
 
 <body>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<div class="container-fluid">
 	  <div class="row-fluid">	
-		<div class="span12 span-fixed-sidebar stagearea">
-			<div ng-include src="'partials/msie-error.html'">
+			<div class="span12 span-fixed-sidebar stagearea">
+				<div ng-include src="'partials/msie-error.html'">
+				</div>
+				<div ng-include src="'partials/hero-unit.html'">
+				</div>			
+				<!--<div id=WIP class="alert alert-warn">
+					<span class=muted>Disclaimer:</span> <b>Work-in-progress; <u>Content still under review</u>. </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class=muted>Note:</span> <b>site issues?</b> refresh browser few times; Site updated often.
+				</div>-->
 			</div>
-			<div ng-include src="'partials/hero-unit.html'">
-			</div>			
-			<!--<div id=WIP class="alert alert-warn">
-				<span class=muted>Disclaimer:</span> <b>Work-in-progress; <u>Content still under review</u>. </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<span class=muted>Note:</span> <b>site issues?</b> refresh browser few times; Site updated often.
-			</div>-->
-		</div>
 	  </div>
 
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	<pageslide ng-show="showSidePanel" ps-open="checked">
+
+	  <pageslide ng-show="showSidePanel" ps-open="checked">
         <div>
             <p>some random content...</p>
         </div>
     </pageslide>
+
+
+
 	  <div class="row-fluid">	
 		<div class="span12 span-fixed-sidebar stagearea">
 			<!--Quran full page view-->
 			<div class="well well-small">
 
-				<span Xng-show="topics && qpage" ng-bind="'Page# ' "></span>
+				<span Xng-show="topics && qpage" ng-bind="'Page# ' ">
+				</span>
+ 				<A ng-click="setPage( qpage, - 1 )" class="btn btn-mini btn-primary"> <B> << </B> </A>
 				<select class="pageDD"
 					ng-model="qpage" required 
 					ng-change="setPage( qpage )"
 					ng-options="value as value for value in qpages">
 					<option>--</option>
 				</select>
+				<A ng-click="setPage( qpage, 1 )" class="btn btn-mini  btn-primary"> <B> >> </B> </A>
 
 
-				<span Xng-show="topics && sura" ng-bind="'Surah ' "></span>
+				<span Xng-show="topics && sura" ng-bind="'Surah ' ">
+				</span>
 				<select
 					ng-model="sura" required 
 					ng-change="setSura(sura)"
 					ng-options="value.id as value.label group by value.group for value in suwar">
 					<option>--</option>
 				</select>
-				<BR>
+
+				<div ng-include src="'partials/quran-reading-template.html'">
+				</div>
+
 				<span ng-show="pageAsbabs">{{ pageAsbabs }} on this page have Asbaab ul Nuzul. </span>
 				<span ng-show="asbabs" title="{{ asbabs }}">&nbsp;&nbsp;<p class="text-muted">(to see all Asbabs of surah, mouseover here).</p></span>
 				<span ng-show="pageSynonyms" title="{{ pageSynonyms }}">This page Synonym topics: 
-					<span ng-repeat="topic in pageSynonyms"><A ng-click="showSynonymTopic(topic);setID(topic)"><span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>&nbsp;</A></span>
+					<span ng-repeat="topic in pageSynonyms"><A ng-click="showSynonymTopic(topic);setID(topic)"><span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span> &nbsp; </A></span>
 			  </span>
 				<span ng-show="surahSynonyms" title="{{ surahSynonyms }}">&nbsp;&nbsp;<p class="text-muted">(to see all Synonym topic indexes of surah, mouseover here).</p></span>
 
@@ -166,7 +154,6 @@
 				<span ng-show="!getTopics()" ng-bind="'-none-'"></span>
  <HR>
 -->				
-				<div ng-include src="'partials/quran-reading-template.html'"></div>
 				</div>
 				
 			</div>

@@ -56,6 +56,10 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 			lastSurah = last.surah,
 			firstAyah = first.ayah,
 			lastAyah = last.ayah;
+
+			$rootScope.sura = firstSurah; 
+			$rootScope.ayah = firstAyah; 
+			$rootScope.ref = firstSurah +':'+ firstAyah;
 			
 			var asbabs = $rootScope.findAsbabForSura( firstSurah ); //$rootScope.qurandata);
 			if(firstSurah != lastSurah){ //special case. ex: the page surah kahf is only
@@ -157,8 +161,7 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 		if( /^\d+$/m.test( ref ) ){//if this is all numbers, assume its a page #
 			//lookup what the corresponding sura, ayahNo is
 			console.log( 'page# ' + ref );
-			$rootScope.qpage = parseInt( ref );
-			$rootScope.sura = 2; $rootScope.ref = '2:80';
+			$rootScope.qpage = parseInt( ref ); //just set the page # and wait for API quran data response to tell us which surah and ayah starts on that page
 		}
 		else if( ayahNo && (ayahNo = parseInt(ayahNo)) && (suraNo = parseInt(ref)) ){
 			//zTODO: also lookup corresponding page# and set to scope.page
