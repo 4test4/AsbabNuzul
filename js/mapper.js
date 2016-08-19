@@ -57,12 +57,12 @@ var ArToEn = function(word){
 					break;
 				}
 			}
-			if(!found){  ar += '?'; console.log('No mapping found:\t' + letter + ''); ar += letter;
+			if(!found && _bMAPPER_DEBUG){  ar += '?'; console.log('No mapping found:\t' + letter + ''); ar += letter;
 			}
 		}
 	}catch(ex){
 		//debugger;
-		ar = '-err: ' + ex + ex.message + ex.lineno;
+		if(_bMAPPER_DEBUG) ar = '-err: ' + ex + ex.message + ex.lineno;
 		console.log(ar);
 	}
 	return ar;
@@ -150,3 +150,5 @@ var initializeMapper = function(){
 	bInitialized = true;
 }		
 initializeMapper();
+
+_bMAPPER_DEBUG = false;
