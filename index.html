@@ -39,10 +39,10 @@
 				<span ng-bind="'Synonym: '"></span>
 				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
 				<span ng-bind="'('+getID()+')'" class="muted"></span>
-			</div>
+			</div><BR>
 			<div ng-show="synonymdetails && synonymdetails.length>0" class=pull-right>
 			  <span dir=rtl ng-repeat="wordO in findSurasForTopic( getID() ).words">
-				<span ng-bind="wordO.word" class="qurantext2 label label-inverse"></span><span ng-show="!$last">&nbsp;-&nbsp;</span>
+				<span ng-bind="wordO.word" class="qurantext2 label label-inverse"></span><span Xng-show="!$last">&nbsp;-&nbsp;</span>
 			  </span>
 			</div><BR/>
 			<div class="clearfix pull-left">

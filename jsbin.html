@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by anonymous (http://jsbin.com/qinivobipa/5/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="http://jashkenas.github.io/underscore/underscore-min.js"></script>
+  <div id=id></div>
+
+  <script ref="2:7:8" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="5:45:7" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="5:45:8" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="21:97:7" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="37:48:4" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="50:22:10" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="55:72:1" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="56:22:1" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="56:22:2" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script ref="56:23" Xqurantype="grammar"    src="//4test4.github.io/quranverse/js/quran.js"></script>
+<script id="jsbin-javascript">
+var refs = [
+'2:7:8',
+'5:45:7',
+'5:45:8',
+'21:97:7',
+'37:48:4',
+'50:22:10',
+'55:72:1',
+'56:22:1',
+'56:22:2',
+'56:23'
+]
+
+var template_url = '//4test4.github.io/quranverse/js/quran.js', 
+  template = '<script ref="$REF" Xqurantype="grammar" \
+   src="' + template_url + '">\
+<\/script>';
+
+_.each( refs, function(ref){
+  
+  console.log( template.replace(/\$REF/g, ref));
+  //$.getScript( ref);
+});
+debugger;
+var script = document.createElement( 'script' );
+script.type = 'text/javascript';
+script.ref = refs[0];
+script.src = template_url.replace(/\$REF/g, refs[0]);
+$("#id").append( script );
+
+</script>
+</body>
+</html>

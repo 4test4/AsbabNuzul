@@ -156,3 +156,7 @@ span.status a.true span{
 	/* background: #F7FCE3 url(../img/frame.png) repeat-y -500px 0;
 	width: 500px; */
 }
+
+.label-inverse{
+	font-size: 120%!important;
+}
