@@ -6,11 +6,15 @@ any words left with > 3 letters, try to reduce using rules:
 -- if 4 lettered, and extra A at beginning, drop the A
 -- if 5 lettered, like mESrAt (m at beginning and At at end), then chop off those to get ESr.
 -- also use to advantage in doing fuzzy search the ayah numbers 1-1 mapping
+.......................................................
 
 function refsToRoots( refs ){ //refs = '1:7 89:15 6:94 11:116 53:48',
 	var url = 'http://api.globalquran.com/ayah/$REF/quran-corpus-qd%7Cen.sahih?beta&Xformat=jsonp&callback=quran987712',
-		results = [];
-	_.each( refs.split(' '), function(ref){
+		refs = _.without(refs.split(' '), ''),
+        refsSorted = _.sortBy(refs, function(r){ return parseInt(r)*1000 + parseInt(r.split(':')[1] ); });
+        results = [];
+	_.each( refsSorted, function(ref){
+      if( ref );
 	  $.get( url.replace(/\$REF/g, ref) )
 	   .then(function( grammar ){   
 		var o = grammar,
@@ -22,8 +26,10 @@ function refsToRoots( refs ){ //refs = '1:7 89:15 6:94 11:116 53:48',
 		  _.each(words, function(word){
 			roots.push( rootRegex.test( word ) ? word.match(rootRegex) : '-' );
 		  });
-		  results.push( {r: ref, roots: roots.join(' ').replace(/ROOT:/g, '' )} );
-		  if(results.length == refs.split(' ').length){ console.table( results ); console.log( JSON.stringify(results) ); }
+		  results.push( {r: ref, pos: _.indexOf(refs, ref), roots: roots.join(' ').replace(/ROOT:/g, '' )} );
+
+          results = _.sortBy(results, function(o){ return _.indexOf(refsSorted, o.r); });
+		  if(results.length == refs.length){ console.table( results ); console.log( JSON.stringify(results) ); }
 	  });
 	});
 }
@@ -46,25 +52,46 @@ xyz('A1', '2:35');
 
 
 
+.......................................................
+TEST CASE 5:
+Topic   p36		18:56
+	["p36", "18:56", "زَلَقَ-أَزْلَقَ زَلَّ-أَزَلَّ دَحَضَ-أَدْحَضَ هَالَ رَاوَدَ", "zlqAzlq zlAzl dHDAdHD hAl rAwd", " 18:40 18:40 18:40 68:51 2:36 2:36 2:36 2:36 18:56…1 12:51 18:40 68:51 16:94 2:36 18:56 73:14 12:51 "]
+zlqAzlq zlAzl dHDAdHD hAl rAwd
+zlq Azlq zl Azl dHD AdHD hAl rAwd   spacings messed up coz word separated by -
+bare2: zlq zlq zl Azl dHD AdHD hAl rwd
+
+2:36 2:36 2:36 2:36 2:36 12:51 12:51 12:51 16:94 18:40 18:40 18:40 18:40 18:56 18:56 18:56 18:56 68:51 68:51 73:14 73:14 73:14 73:14
+2:36 12:51 16:94 18:40 18:56 68:51 73:14
+[
+{"r":"2:36","pos":2,"roots":"zll $Tn - xrj - kwn - qwl hbT bED bED Edw - - ArD qrr mtE - Hyn -"},
+{"r":"12:51","pos":5,"roots":"qwl - xTb - rwd - - nfs qwl Hw$ Alh - Elm - - swA qwl mrA Ezz - HSHS Hqq - rwd - nfs - - Sdq -"},
+{"r":"16:94","pos":6,"roots":"- Ax* ymn dxl byn zll qdm bEd vbt *wq swA - Sdd - sbl Alh - E*b EZm -"},
+{"r":"18:40","pos":0,"roots":"Esy rbb - Aty xyr - jnn rsl - Hsb - smw SbH SEd zlq -"},
+{"r":"18:56","pos":3,"roots":"- rsl rsl - b$r n*r jdl - kfr bTl dHD - Hqq Ax* Ayy - n*r hzA -"},
+{"r":"68:51","pos":1,"roots":"- kwd - kfr zlq bSr - smE *kr qwl - jnn -"},
+{"r":"73:14","pos":4,"roots":"ywm rjf ArD jbl kwn jbl kvb hyl -"},
+]
+
 ....................................................................
 TEST CASE 4:
 Topic 	A1		'2:35'
 		["سَكَنَ", "تَبَوَّأَ (بوء)", "ثَوَى", "بَدَا (بَدُو)", "حَضَرَ", "خَلَدَ", "عَاشَرَ", "غَنِيَ"]
 bare "skn tbwA bw' vwY bdA bdw HDr xld EA$r gny"
 	  skn tbwA bw' vwY bdA bdw HDr xld EA$r gny
+bare2 skn tbw bw' vwY bdA bdw HDr xld E$r gny
 	[" 2:35 14:37 12:56 3:121 28:45 2:25 2:196 12:100 4:19 7:92 "]
+	   2:25 2:35 2:196 3:121 4:19 7:92 12:56 12:100 14:37 28:45
 [
-{"r":"","roots":"smw Alh rHm rHm -"},
-{"r":"3:121","roots":"- gdw - Ahl bwA Amn qEd qtl Alh smE Elm -"},
-{"r":"14:37","roots":"rbb - skn - *rr wdy gyr - zrE End byt Hrm rbb qwm Slw jEl fAd - nws hwy - rzq - vmr - $kr -"},
-{"r":"12:56","roots":"- mkn - - ArD bwA - Hyv $yA Swb rHm - $yA - DyE Ajr Hsn -"},
-{"r":"2:35","roots":"qwl - skn - zwj jnn Akl - rgd Hyv $yA - qrb - $jr kwn - Zlm -"},
-{"r":"28:45","roots":"- n$A qrn Twl - Emr - kwn vwy - Ahl - tlw - Ayy - kwn rsl -"},
-{"r":"2:25","roots":"b$r - Amn Eml SlH - - jnn jry - tHt nhr kll rzq - - vmr rzq qwl - - rzq - qbl Aty - $bh - - zwj Thr - - xld -"},
-{"r":"2:196","roots":"tmm Hjj Emr Alh - HSr - ysr - hdy - Hlq rAs - blg hdy Hll - kwn - mrD - - A*y - rAs fdy - Swm - Sdq - nsk - Amn - mtE Emr - Hjj - ysr - hdy - - wjd Swm vlv ywm - Hjj sbE - rjE - E$r kml - - - kwn Ahl HDr sjd Hrm wqy Alh Elm - Alh $dd Eqb -"},
-{"r":"","roots":"smw Alh rHm rHm -"},{"r":"12:100","roots":"rfE Abw - Er$ xrr - sjd qwl Abw - Awl rAy - qbl - jEl rbb Hqq - Hsn - - xrj - sjn jyA - - bdw - bEd - nzg $Tn byn byn Axw - rbb lTf - $yA - - Elm Hkm -"},
-{"r":"4:19","roots":"- - Amn - Hll - - wrv nsw krh - EDl *hb bED - Aty - - Aty fH$ byn E$r Erf - krh Esy - krh $yA jEl Alh - xyr kvr -"},
-{"r":"7:92","roots":"- k*b - - - gny - - k*b - kwn - xsr -"}
+{"r":"2:25","pos":5,"roots":"b$r - Amn Eml SlH - - jnn jry - tHt nhr kll rzq - - vmr rzq qwl - - rzq - qbl Aty - $bh - - zwj Thr - - xld -"},
+{"r":"2:35","pos":0,"roots":"qwl - skn - zwj jnn Akl - rgd Hyv $yA - qrb - $jr kwn - Zlm -"},
+{"r":"2:196","pos":6,"roots":"tmm Hjj Emr Alh - HSr - ysr - hdy - Hlq rAs - blg hdy Hll - kwn - mrD - - A*y - rAs fdy - Swm - Sdq - nsk - Amn - mtE Emr - Hjj - ysr - hdy - - wjd Swm vlv ywm - Hjj sbE - rjE - E$r kml - - - kwn Ahl HDr sjd Hrm wqy Alh Elm - Alh $dd Eqb -"},
+{"r":"3:121","pos":3,"roots":"- gdw - Ahl bwA Amn qEd qtl Alh smE Elm -"},
+{"r":"4:19","pos":8,"roots":"- - Amn - Hll - - wrv nsw krh - EDl *hb bED - Aty - - Aty fH$ byn E$r Erf - krh Esy - krh $yA jEl Alh - xyr kvr -"},
+{"r":"7:92","pos":9,"roots":"- k*b - - - gny - - k*b - kwn - xsr -"},
+{"r":"12:56","pos":2,"roots":"- mkn - - ArD bwA - Hyv $yA Swb rHm - $yA - DyE Ajr Hsn -"},
+{"r":"12:100","pos":7,"roots":"rfE Abw - Er$ xrr - sjd qwl Abw - Awl rAy - qbl - jEl rbb Hqq - Hsn - - xrj - sjn jyA - - bdw - bEd - nzg $Tn byn byn Axw - rbb lTf - $yA - - Elm Hkm -"},
+{"r":"14:37","pos":1,"roots":"rbb - skn - *rr wdy gyr - zrE End byt Hrm rbb qwm Slw jEl fAd - nws hwy - rzq - vmr - $kr -"},
+{"r":"28:45","pos":4,"roots":"- n$A qrn Twl - Emr - kwn vwy - Ahl - tlw - Ayy - kwn rsl -"},
 ]
 
 ....................................................................
