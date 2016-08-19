@@ -115,6 +115,16 @@
 		<div class="span12 span-fixed-sidebar stagearea">
 			<!--Quran full page view-->
 			<div class="well well-small">
+
+				<span Xng-show="topics && qpage" ng-bind="'Page# ' "></span>
+				<select class="pageDD"
+					ng-model="qpage" required 
+					ng-change="setPage( qpage )"
+					ng-options="value as value for value in qpages">
+					<option>--</option>
+				</select>
+
+
 				<span Xng-show="topics && sura" ng-bind="'Surah ' "></span>
 				<select
 					ng-model="sura" required 
@@ -122,6 +132,7 @@
 					ng-options="value.id as value.label group by value.group for value in suwar">
 					<option>--</option>
 				</select>
+				<BR>
 				<span ng-show="pageAsbabs">{{ pageAsbabs }} on this page have Asbaab ul Nuzul. </span>
 				<span ng-show="asbabs" title="{{ asbabs }}">&nbsp;&nbsp;<p class="text-muted">(to see all Asbabs of surah, mouseover here).</p></span>
 				<span ng-show="pageSynonyms" title="{{ pageSynonyms }}">This page Synonym topics: 

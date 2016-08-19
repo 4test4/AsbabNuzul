@@ -34,6 +34,10 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 	_.each( _.range(1, 115), function(i, surano){
 		$rootScope.suwar.push( { id: ++surano, group: parseInt( 1 + surano/10 ), label: surano + (suraNames ? ': '+ suraNames[surano] : '') });
 	});
+
+	$rootScope.qpages = _.range(1, 605);
+	$rootScope.qpage = 1;
+	
 	
 	$rootScope.fetchSura = function(ref){
 		var data, o, dataUrl = "//api.globalquran.com/page/$REF/quran-simple|en.sahih";
@@ -137,6 +141,12 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 		return $rootScope.refTopics = findTopicsForRef(ref);
 	}
 	
+	$rootScope.setPage = function(qpage, diff){
+		if(diff){ $rootScope.qpage = qpage = qpage + diff; }
+		if(qpage <= 0){ qpage = 1; }
+		if(qpage >= 605){ qpage = 604; }
+		$rootScope.setRef(qpage);
+	}
 	$rootScope.setSura = function(sura){
 		$rootScope.setRef(sura + ":1");
 	}
@@ -144,11 +154,18 @@ var asbabNuzulController = function($scope, $route, $routeParams, $location, $ht
 		return $rootScope.sura = $rootScope.sura || 1;
 	}
 	$rootScope.setRef = function(ref, ayahNo){ var suraNo;
-		if( ayahNo && (ayahNo = parseInt(ayahNo)) && (suraNo = parseInt(ref)) ){
+		if( /^\d+$/m.test( ref ) ){//if this is all numbers, assume its a page #
+			//lookup what the corresponding sura, ayahNo is
+			console.log( 'page# ' + ref );
+			$rootScope.qpage = parseInt( ref );
+			$rootScope.sura = 2; $rootScope.ref = '2:80';
+		}
+		else if( ayahNo && (ayahNo = parseInt(ayahNo)) && (suraNo = parseInt(ref)) ){
+			//zTODO: also lookup corresponding page# and set to scope.page
 			ref = suraNo +':'+ ++ayahNo; //TODO: ensure ayahNo is < maxAyahs in sura
+			$rootScope.sura = parseInt( ref ); $rootScope.ref = ref;
 		}
 		$rootScope.fetchSura(ref);
-		$rootScope.sura = parseInt( ref ); $rootScope.ref = ref;
 		if(ref != '1:1'){ 
 			$('.carousel').carousel('pause'); 
 			if( $('.carousel  .item.active').html().indexOf( 'Quran' ) == -1){ //only if no Quran in view, change to it.

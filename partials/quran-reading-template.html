@@ -21,8 +21,10 @@
 				</A>
 			</span>
 			<HR>
- -->			<div ng-show="$last"><A ng-click="setRef( verse.surah, verse.ayah )" class="btn btn-mini">Next page</A>
-			</div>
+ -->		<div ng-show="$last">
+	 			  <A ng-click="setPage( qpage, 1 )" class="btn btn-mini">Next page</A>
+	 				<A ng-click="setPage( qpage, - 1 )" class="btn btn-mini">Previous page</A> &nbsp;&nbsp;	
+			  </div>
 		  </span>
 		</span>
 	   </div>
