@@ -121,8 +121,13 @@
 				<div ng-include src="'partials/quran-reading-template.html'">
 				</div>
 
-				<span ng-show="pageAsbabs">{{ pageAsbabs }} on this page have Asbaab ul Nuzul. </span>
+				<span ng-show="pageAsbabs">
+					<span ng-bind="'ASBAB'" class="label label-warning"></span>					
+					{{ pageAsbabs }} on this page have Asbaab ul Nuzul. 
+				</span>
 				<span ng-show="asbabs" title="{{ asbabs }}">&nbsp;&nbsp;<p class="text-muted">(to see all Asbabs of surah, mouseover here).</p></span>
+
+				<span ng-bind="'SYNMS'" class="label label-info" ng-click="details = !details"></span>
 				<span ng-show="pageSynonyms" title="{{ pageSynonyms }}">This page Synonym topics: 
 					<span ng-repeat="topic in pageSynonyms"><A ng-click="showSynonymTopic(topic);setID(topic)"><span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span> &nbsp; </A></span>
 			  </span>
